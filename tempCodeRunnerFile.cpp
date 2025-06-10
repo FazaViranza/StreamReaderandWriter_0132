@@ -1,48 +1,26 @@
-#include <fstream>
 #include <iostream>
-#include <string>
+#include <exception>
+//untuk obyek exception yang akan digunakan
+#include <array>
+//untuk obyek array yang akan kita gunakan
 using namespace std;
 
-int main() {
-    string baris;
-    string NamaFile;
-    cout << "Masukan Nama Fila : ";
-    cin >> NamaFile;
-    // membuka file dalam mode menulis.
-    ofstream outfile;
-    // menunjuk ke sebuah nama file
-    outfile.open(NamaFile + ".txt", ios::out);
-    cout << ">= Menulis file \'q\' untuk keluar" << endl;
-    //unlimited loop untuk menulis
-    while (true) {
-        cout << "- ";
-        //mendapatkan setiap karakter dalam satu baris
-        getline(cin, baris);
-        //loop akan berhenti jika anda memasukan karakter q
-        if (baris == 'q') break;
-        //menulis dan memasukan nilai dari 'baris' ke dalam file
-        outfile << baris << endl;
+int main()
+{
+    cout << "Awal Program" << endl; //penanda 1:...
+    try {
+        array<int, 3> data = { 10, 20, 30 };
+        //pesan array integer 3 elemen
+        cout << data.at(5) << endl;
+        //memanggil array elemen ke 5
     }
-    //selesai dalam menulis sekarang tutup filenya
-    outfile.close();
-    //Membuka file dalam mode membaca
-    ifstream infile;
-     //menunjuk ke sebuah file
-    infile.open(NamaFile, ios::in);
-    cout << endl << ">= Membuka dan membaca file " << endl;
-    //jika file ada maka
-    if (infile.is_open())
-    {
-        //melakukan perulangan setiap baris
-        while (getline(infile, baris))
-        {
-            //dan tampilkan di sini
-            cout << baris << '\n';
-        }
-        //tutup file tersebut setelah selesai
-        infile.close();
+    catch (exception& e) {
+        //penangkap menggunakan obyek exception
+        cout << e.what() << endl;
+        /*akan dieksekusi karena array data hanya memiliki 3 elemen*/
     }
-    //jika tidak ditemukan file maka akan menampilkan ini
-    else cout << "Unable to open file";
+    cout << "Baris Program Yang terakhir" << endl;
+    /*penanda 2: bahwa program berjalan tanpa berhenti
+    meskipun terjadi kesalahan*/
     return 0;
 }
